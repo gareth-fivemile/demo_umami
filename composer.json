@@ -1,0 +1,5 @@
+{
+    "name": "drupal/demo_umami",
+    "type": "drupal-profile",
+    "description": "The demo profile used for the out of the box initiative."
+}
