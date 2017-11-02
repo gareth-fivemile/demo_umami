@@ -9,7 +9,7 @@ dependencies:
     - umami
 id: umami_footer
 theme: umami
-region: top
+region: footer
 weight: 0
 provider: null
 plugin: 'system_menu_block:footer'
