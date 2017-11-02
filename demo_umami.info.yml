@@ -38,6 +38,5 @@ dependencies:
   - tour
   - automated_cron
 themes:
-  - bartik
   - seven
   - umami
