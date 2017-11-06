@@ -5,7 +5,7 @@ dependencies:
     - umami
 id: umami_local_tasks
 theme: umami
-region: content
+region: tabs
 weight: -7
 provider: null
 plugin: local_tasks_block

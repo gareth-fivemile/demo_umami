@@ -5,7 +5,7 @@ dependencies:
     - umami
 id: umami_page_title
 theme: umami
-region: content
+region: page_title
 weight: -7
 provider: null
 plugin: page_title_block
