@@ -17,11 +17,11 @@ function demo_umami_content_install() {
     'demo_umami_content__authors',
     // 'demo_umami_content__pages',
     // 'demo_umami_content__recipes',
-    // 'demo_umami_content__article',
-     'demo_umami_content__article_authors',
+    'demo_umami_content__article_authors',
+    'demo_umami_content__article_tags',
+    'demo_umami_content__article',
     // 'demo_umami_content__article_images_url',
     // 'demo_umami_content__article_media_images_url',
-     'demo_umami_content__article_tags',
   ]);
 }
 
@@ -37,10 +37,10 @@ function demo_umami_content_uninstall() {
     'demo_umami_content__authors',
 //    'demo_umami_content__pages',
 //    'demo_umami_content__recipes',
-//    'demo_umami_content__article',
     'demo_umami_content__article_authors',
+    'demo_umami_content__article_tags',
+    'demo_umami_content__article',
 //    'demo_umami_content__article_images_url',
 //    'demo_umami_content__article_media_images_url',
-    'demo_umami_content__article_tags',
   ]);
 }
