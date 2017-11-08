@@ -1,0 +1,68 @@
+id: demo_umami_content__recipes
+status: true
+source:
+  plugin: demo_umami_content__csv
+  path: default_content/recipes.csv
+  header_row_count: 1
+  keys:
+    - title
+process:
+  title: title
+#  image:
+  body: summary
+#  author:
+#  category:
+  field_preparation_time: preparation_time
+  field_total_time: total_time
+  field_difficulty: difficulty
+  field_ingredients:
+    plugin: explode
+    delimiter: ','
+    source: ingredients
+  field_recipe_instruction: recipe_instruction
+  # @todo does this field exist already?
+#  number_of_servings:
+#  tags:
+  # @todo This field does not exist yet
+#  recipe_review:
+
+  langcode:
+    plugin: default_value
+    default_value: 'en'
+
+  # Note: This makes it possible to pull in values from another migration.
+  field_tags:
+    -
+      plugin: explode
+      delimiter: ','
+      source: tags
+    -
+      plugin: migration_lookup
+      migration: demo_umami_content__tags
+  field_category:
+    -
+      plugin: explode
+      delimiter: ','
+      source: category
+    -
+      plugin: migration_lookup
+      migration: demo_umami_content__category
+  uid:
+    plugin: migration_lookup
+    migration: demo_umami_content__authors
+    source: author
+  field_image:
+    plugin: migration_lookup
+    migration:
+      - demo_umami_content__media_images_url
+    source: image
+destination:
+  plugin: 'entity:node'
+  default_bundle: recipe
+migration_dependencies:
+  required:
+    - demo_umami_content__category
+    - demo_umami_content__tags
+    - demo_umami_content__authors
+    - demo_umami_content__media_images_url
+    - demo_umami_content__images_url

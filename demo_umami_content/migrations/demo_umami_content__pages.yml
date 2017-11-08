@@ -1,0 +1,28 @@
+id: demo_umami_content__pages
+status: true
+source:
+  plugin: demo_umami_content__csv
+  path: default_content/pages.csv
+  header_row_count: 1
+  keys:
+    - title
+process:
+  title: title
+  'body/value': body
+  'body/format':
+    plugin: default_value
+    default_value: 'full_html'
+  path: slug
+  uid:
+    plugin: migration_lookup
+    migration: demo_umami_content__authors
+    source: author
+destination:
+  plugin: 'entity:node'
+  default_bundle: page
+migration_dependencies:
+  required:
+    - demo_umami_content__authors
+dependencies:
+  config:
+    - filter.format.full_html.yml

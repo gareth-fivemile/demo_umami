@@ -1,0 +1,16 @@
+name: 'Umami demo: Content'
+description: Imports the content for the Umami demo.
+type: module
+core: 8.x
+dependencies:
+  # - comment
+  - field
+  - file
+  - image
+  - node
+  - options
+  - path
+  - taxonomy
+  - text
+  - user
+  - migrate

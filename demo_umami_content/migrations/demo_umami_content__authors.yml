@@ -1,0 +1,19 @@
+id: demo_umami_content__authors
+status: true
+source:
+  plugin: demo_umami_content__terms
+  path: default_content/recipes.csv
+  header_row_count: 1
+  column: author
+  keys:
+    - author
+process:
+  name: author
+  langcode:
+    plugin: default_value
+    default_value: 'en'
+  status:
+    plugin: default_value
+    default_value: 1
+destination:
+  plugin: 'entity:user'
