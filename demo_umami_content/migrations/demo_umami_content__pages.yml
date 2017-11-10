@@ -15,14 +15,14 @@ process:
   path: slug
   uid:
     plugin: migration_lookup
-    migration: demo_umami_content__authors
+    migration: demo_umami_content__page_authors
     source: author
 destination:
   plugin: 'entity:node'
   default_bundle: page
 migration_dependencies:
   required:
-    - demo_umami_content__authors
+    - demo_umami_content__page_authors
 dependencies:
   config:
     - filter.format.full_html.yml
