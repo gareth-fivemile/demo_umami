@@ -9,19 +9,20 @@ source:
 process:
   title: title
 #  image:
-  body: summary
+  field_summary: summary
 #  author:
 #  category:
   field_preparation_time: preparation_time
+  field_cooking_time: cooking_time
   field_total_time: total_time
   field_difficulty: difficulty
+  field_number_of_servings: number_of_servings
   field_ingredients:
     plugin: explode
     delimiter: ','
     source: ingredients
   field_recipe_instruction: recipe_instruction
   # @todo does this field exist already?
-#  number_of_servings:
 #  tags:
   # @todo This field does not exist yet
 #  recipe_review:
