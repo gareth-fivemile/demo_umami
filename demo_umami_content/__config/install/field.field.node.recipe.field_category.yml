@@ -2,14 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_category
+    - field.storage.node.field_recipe_category
     - node.type.recipe
-    - taxonomy.vocabulary.category
-id: node.recipe.field_category
-field_name: field_category
+    - taxonomy.vocabulary.recipe_category
+id: node.recipe.field_recipe_category
+field_name: field_recipe_category
 entity_type: node
 bundle: recipe
-label: Category
+label: Recipe category
 description: ''
 required: false
 translatable: false
@@ -19,7 +19,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      category: category
+      recipe_category: recipe_category
     sort:
       field: _none
     auto_create: false

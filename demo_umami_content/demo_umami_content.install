@@ -10,7 +10,7 @@
  */
 function demo_umami_content_install() {
   \Drupal::service('demo_umami_content.migration_runner')->run([
-    'demo_umami_content__category',
+    'demo_umami_content__recipe_category',
     'demo_umami_content__tags',
     // 'demo_umami_content__images_url',
     // 'demo_umami_content__media_images_url',
@@ -31,7 +31,7 @@ function demo_umami_content_install() {
  */
 function demo_umami_content_uninstall() {
   \Drupal::service('demo_umami_content.migration_runner')->remove([
-    'demo_umami_content__category',
+    'demo_umami_content__recipe_category',
     'demo_umami_content__tags',
 //    'demo_umami_content__images_url',
 //    'demo_umami_content__media_images_url',
