@@ -4,8 +4,8 @@ dependencies:
   enforced:
     module:
       - demo_umami_content
-name: Category
-vid: category
+name: Recipe category
+vid: recipe_category
 description: ''
 hierarchy: 0
 weight: 0

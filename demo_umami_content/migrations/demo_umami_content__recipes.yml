@@ -11,7 +11,6 @@ process:
 #  image:
   field_summary: summary
 #  author:
-#  category:
   field_preparation_time: preparation_time
   field_cooking_time: cooking_time
   field_total_time: total_time
@@ -40,14 +39,14 @@ process:
     -
       plugin: migration_lookup
       migration: demo_umami_content__tags
-  field_category:
+  field_recipe_category:
     -
       plugin: explode
       delimiter: ','
-      source: category
+      source: recipe_category
     -
       plugin: migration_lookup
-      migration: demo_umami_content__category
+      migration: demo_umami_content__recipe_category
   uid:
     plugin: migration_lookup
     migration: demo_umami_content__authors

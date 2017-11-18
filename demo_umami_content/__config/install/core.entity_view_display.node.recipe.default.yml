@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_display.comment.recipe_review.default
-    - field.field.node.recipe.field_category
+    - field.field.node.recipe.field_recipe_category
     - field.field.node.recipe.field_difficulty
     - field.field.node.recipe.field_image
     - field.field.node.recipe.field_ingredients
@@ -25,7 +25,7 @@ targetEntityType: node
 bundle: recipe
 mode: default
 content:
-  field_category:
+  field_recipe_category:
     weight: 105
     label: above
     settings:
