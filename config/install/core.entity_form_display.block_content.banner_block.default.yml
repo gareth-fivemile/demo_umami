@@ -1,0 +1,59 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.banner_block
+    - field.field.block_content.banner_block.field_background_image
+    - field.field.block_content.banner_block.field_content_link
+    - field.field.block_content.banner_block.field_summary
+    - field.field.block_content.banner_block.field_title
+    - image.style.thumbnail
+  module:
+    - image
+id: block_content.banner_block.default
+targetEntityType: block_content
+bundle: banner_block
+mode: default
+content:
+  field_background_image:
+    weight: 30
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_content_link:
+    weight: 29
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_summary:
+    weight: 28
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_title:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }
