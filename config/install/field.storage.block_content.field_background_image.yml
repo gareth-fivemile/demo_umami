@@ -5,8 +5,8 @@ dependencies:
     - block_content
     - file
     - image
-id: block_content.field_background_image
-field_name: field_background_image
+id: block_content.field_banner_image
+field_name: field_banner_image
 entity_type: block_content
 type: image
 settings:

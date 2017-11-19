@@ -3,11 +3,11 @@ status: true
 dependencies:
   config:
     - block_content.type.banner_block
-    - field.storage.block_content.field_background_image
+    - field.storage.block_content.field_banner_image
   module:
     - image
-id: block_content.banner_block.field_background_image
-field_name: field_background_image
+id: block_content.banner_block.field_banner_image
+field_name: field_banner_image
 entity_type: block_content
 bundle: banner_block
 label: 'Background image'
