@@ -15,9 +15,9 @@ provider: null
 plugin: 'system_menu_block:footer'
 settings:
   id: 'system_menu_block:footer'
-  label: 'Footer menu'
+  label: 'Tell us what you think'
   provider: system
-  label_display: '0'
+  label_display: '1'
   level: 1
   depth: 0
 visibility: {  }

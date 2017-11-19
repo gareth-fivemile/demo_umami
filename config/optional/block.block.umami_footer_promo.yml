@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - demo_umami_content
+  theme:
+    - umami
+id: umami_footer_promo
+theme: umami
+region: footer
+weight: -1
+provider: null
+plugin: umami_footer_promo
+settings:
+  id: umami_footer_promo
+  label: 'Umami Footer promo'
+  provider: demo_umami_content
+  label_display: '0'
+visibility: {  }
