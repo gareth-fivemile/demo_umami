@@ -10,7 +10,7 @@ id: block_content.banner_block.field_banner_image
 field_name: field_banner_image
 entity_type: block_content
 bundle: banner_block
-label: 'Background image'
+label: 'Banner image'
 description: ''
 required: false
 translatable: false
