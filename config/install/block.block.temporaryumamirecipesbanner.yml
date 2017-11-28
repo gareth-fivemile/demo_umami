@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - demo_umami_content
+    - system
+  theme:
+    - umami
+id: temporaryumamirecipesbanner
+theme: umami
+region: banner_top
+weight: -5
+provider: null
+plugin: umami_recipes_banner_temp
+settings:
+  id: umami_recipes_banner_temp
+  label: 'Temporary: Umami Recipes Banner'
+  provider: demo_umami_content
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: /recipes
+    negate: false
+    context_mapping: {  }

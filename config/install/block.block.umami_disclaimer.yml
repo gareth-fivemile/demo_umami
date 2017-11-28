@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - demo_umami_content
+  theme:
+    - umami
+id: umami_disclaimer
+theme: umami
+region: bottom
+weight: -8
+provider: null
+plugin: umami_disclaimer
+settings:
+  id: umami_disclaimer
+  label: 'Umami disclaimer'
+  provider: demo_umami_content
+  label_display: '0'
+visibility: {  }
