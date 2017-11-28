@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.highlighted_bottom
+    - field.field.node.article.body
+    - field.field.node.article.field_image
+    - field.field.node.article.field_tags
+    - image.style.large
+    - node.type.article
+  module:
+    - image
+    - user
+id: node.article.highlighted_bottom
+targetEntityType: node
+bundle: article
+mode: highlighted_bottom
+content:
+  field_image:
+    type: image
+    weight: 0
+    region: content
+    settings:
+      image_style: large
+      image_link: ''
+    third_party_settings: {  }
+    label: hidden
+hidden:
+  body: true
+  field_tags: true
+  links: true
