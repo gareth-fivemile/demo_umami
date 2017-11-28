@@ -8,7 +8,7 @@ dependencies:
 id: umami_content
 theme: umami
 region: content
-weight: 0
+weight: -7
 provider: null
 plugin: system_main_block
 settings:

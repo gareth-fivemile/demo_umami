@@ -8,7 +8,7 @@ dependencies:
 id: umami_messages
 theme: umami
 region: highlighted
-weight: -10
+weight: -8
 provider: null
 plugin: system_messages_block
 settings:
