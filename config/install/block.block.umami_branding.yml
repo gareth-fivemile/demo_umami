@@ -8,7 +8,7 @@ dependencies:
 id: umami_branding
 theme: umami
 region: header
-weight: 0
+weight: -10
 provider: null
 plugin: system_branding_block
 settings:

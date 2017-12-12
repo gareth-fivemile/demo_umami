@@ -10,7 +10,7 @@ dependencies:
 id: umami_main_menu
 theme: umami
 region: header
-weight: 1
+weight: -8
 provider: null
 plugin: 'system_menu_block:main'
 settings:
