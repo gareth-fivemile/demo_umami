@@ -11,7 +11,7 @@ process:
   'body/value': body
   'body/format':
     plugin: default_value
-    default_value: 'full_html'
+    default_value: 'basic_html'
   path: slug
   field_tags:
     -
@@ -41,4 +41,4 @@ migration_dependencies:
     # - demo_umami_content__article_images_url
 dependencies:
   config:
-    - filter.format.full_html.yml
+    - filter.format.basic_html.yml

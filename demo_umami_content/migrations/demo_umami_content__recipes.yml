@@ -9,7 +9,10 @@ source:
 process:
   title: title
 #  image:
-  field_summary: summary
+  'field_summary/value': summary
+  'field_summary/format':
+    plugin: default_value
+    default_value: 'basic_html'
 #  author:
   field_preparation_time: preparation_time
   field_cooking_time: cooking_time
@@ -20,7 +23,10 @@ process:
     plugin: explode
     delimiter: ','
     source: ingredients
-  field_recipe_instruction: recipe_instruction
+  'field_recipe_instruction/value': recipe_instruction
+  'field_recipe_instruction/format':
+    plugin: default_value
+    default_value: 'basic_html'
   # @todo does this field exist already?
 #  tags:
   # @todo This field does not exist yet
@@ -66,3 +72,6 @@ migration_dependencies:
     - demo_umami_content__authors
 #    - demo_umami_content__media_images_url
 #    - demo_umami_content__images_url
+dependencies:
+  config:
+    - filter.format.basic_html.yml

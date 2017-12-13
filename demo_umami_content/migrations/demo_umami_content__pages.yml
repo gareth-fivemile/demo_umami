@@ -11,7 +11,7 @@ process:
   'body/value': body
   'body/format':
     plugin: default_value
-    default_value: 'full_html'
+    default_value: 'basic_html'
   path: slug
   uid:
     plugin: migration_lookup
@@ -25,4 +25,4 @@ migration_dependencies:
     - demo_umami_content__page_authors
 dependencies:
   config:
-    - filter.format.full_html.yml
+    - filter.format.basic_html.yml
