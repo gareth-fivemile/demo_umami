@@ -67,4 +67,9 @@ function demo_umami_install() {
 
   // Enable the admin theme.
   \Drupal::configFactory()->getEditable('node.settings')->set('use_admin_theme', TRUE)->save(TRUE);
+
+  // Enable the demo content module. This can't be specified as a dependency
+  // in the demo_umami.info.yml file, as it requires configuration provided by
+  // the profile (fields etc.).
+  \Drupal::service('module_installer')->install(['demo_umami_content'], TRUE);
 }
