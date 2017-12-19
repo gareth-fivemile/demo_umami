@@ -16,4 +16,8 @@ settings:
   label: 'Umami Footer promo'
   provider: demo_umami_content
   label_display: '0'
+  promo_title: 'Umami Food Magazine'
+  promo_text: 'Skills and know-how. Magazine exclusive articles, recipes and plenty of reasons to get your copy today.'
+  findmore_url: 'https://www.drupal.org'
+  findmore_text: 'Find out more'
 visibility: {  }
