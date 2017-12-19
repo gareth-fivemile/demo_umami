@@ -16,4 +16,10 @@ settings:
   label: 'Umami disclaimer'
   provider: demo_umami_content
   label_display: '0'
+  umami_disclaimer:
+    value: '<strong>Umami Magazine & Umami Publications</strong> is a fictional magazine and publisher for illustrative purposes only.'
+    format: 'basic_html'
+  umami_copyright:
+    value: '&copy; 2017 Terms & Conditions'
+    format: 'basic_html'
 visibility: {  }
