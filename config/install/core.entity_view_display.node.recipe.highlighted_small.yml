@@ -14,12 +14,13 @@ dependencies:
     - field.field.node.recipe.field_recipe_instruction
     - field.field.node.recipe.field_summary
     - field.field.node.recipe.field_tags
-    - image.style.large
     - node.type.recipe
+    - responsive_image.styles.square_image
   module:
-    - image
     - options
+    - responsive_image
     - user
+_core:
 id: node.recipe.highlighted_small
 targetEntityType: node
 bundle: recipe
@@ -36,10 +37,10 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: large
+      responsive_image_style: square_image
       image_link: content
     third_party_settings: {  }
-    type: image
+    type: responsive_image
     region: content
   links:
     weight: 2

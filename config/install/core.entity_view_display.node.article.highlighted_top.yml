@@ -6,22 +6,23 @@ dependencies:
     - field.field.node.article.body
     - field.field.node.article.field_image
     - field.field.node.article.field_tags
-    - image.style.large
     - node.type.article
+    - responsive_image.styles.3_2_image
   module:
-    - image
+    - responsive_image
     - user
+_core:
 id: node.article.highlighted_top
 targetEntityType: node
 bundle: article
 mode: highlighted_top
 content:
   field_image:
-    type: image
+    type: responsive_image
     weight: 0
     region: content
     settings:
-      image_style: large
+      responsive_image_style: 3_2_image
       image_link: ''
     third_party_settings: {  }
     label: hidden
