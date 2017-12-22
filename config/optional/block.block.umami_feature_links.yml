@@ -1,26 +1,22 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - views.view.promoted_items
   module:
+    - demo_umami_content
     - system
-    - views
   theme:
     - umami
-id: views_block__promoted_items_block_1
+id: umami_feature_links
 theme: umami
 region: banner_top
-weight: -8
+weight: -5
 provider: null
-plugin: 'views_block:promoted_items-block_1'
+plugin: umami_feature_links
 settings:
-  id: 'views_block:promoted_items-block_1'
-  label: ''
-  provider: views
+  id: umami_feature_links
+  label: 'Umami feature links'
+  provider: demo_umami_content
   label_display: '0'
-  views_label: ''
-  items_per_page: none
 visibility:
   request_path:
     id: request_path
