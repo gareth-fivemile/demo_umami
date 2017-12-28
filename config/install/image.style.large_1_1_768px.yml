@@ -5,7 +5,6 @@ name: large_1_1_768px
 label: 'Large 1:1 (768px)'
 effects:
   4d6664c9-da05-431d-87c0-2f8ff0a51efd:
-    uuid: 4d6664c9-da05-431d-87c0-2f8ff0a51efd
     id: image_scale_and_crop
     weight: 1
     data:
