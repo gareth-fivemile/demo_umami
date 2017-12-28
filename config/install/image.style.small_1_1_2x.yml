@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+name: small_1_1_2x
+label: 'Small 1:1 2x (800px)'
+effects:
+  b38ad3c4-3a4d-4a9e-9716-bd730f0d0829:
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 800
+      height: 800

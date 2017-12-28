@@ -37,6 +37,7 @@ dependencies:
   - views_ui
   - tour
   - automated_cron
+  - responsive_image
 themes:
   - seven
   - umami

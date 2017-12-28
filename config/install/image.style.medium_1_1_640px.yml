@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+name: medium_1_1_640px
+label: 'Medium 1:1 (640px)'
+effects:
+  fbbf2e63-e574-4686-85cf-ef8280d2b386:
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 640
+      height: 640

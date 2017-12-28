@@ -6,10 +6,12 @@ dependencies:
     - field.field.node.article.field_image
     - field.field.node.article.field_tags
     - node.type.article
+    - responsive_image.styles.3_2_image
   module:
-    - image
+    - responsive_image
     - text
     - user
+_core:
 id: node.article.default
 targetEntityType: node
 bundle: article
@@ -23,11 +25,11 @@ content:
     third_party_settings: {  }
     label: hidden
   field_image:
-    type: image
+    type: responsive_image
     weight: 1
     region: content
     settings:
-      image_style: ''
+      responsive_image_style: 3_2_image
       image_link: ''
     third_party_settings: {  }
     label: hidden

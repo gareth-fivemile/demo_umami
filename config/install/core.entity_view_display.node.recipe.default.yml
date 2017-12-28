@@ -14,11 +14,13 @@ dependencies:
     - field.field.node.recipe.field_summary
     - field.field.node.recipe.field_tags
     - node.type.recipe
+    - responsive_image.styles.3_2_image
   module:
-    - image
     - options
+    - responsive_image
     - text
     - user
+_core:
 id: node.recipe.default
 targetEntityType: node
 bundle: recipe
@@ -42,12 +44,12 @@ content:
     region: content
   field_image:
     weight: 3
-    label: above
+    label: hidden
     settings:
-      image_style: ''
+      responsive_image_style: 3_2_image
       image_link: ''
     third_party_settings: {  }
-    type: image
+    type: responsive_image
     region: content
   field_ingredients:
     weight: 4

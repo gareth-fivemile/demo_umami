@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+name: large_1_1_2x
+label: 'Large 1:1 2x (1536)'
+effects:
+  e55d4151-409f-4dc3-8409-a0d542a06e99:
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1536
+      height: 1536
