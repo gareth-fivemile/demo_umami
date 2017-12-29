@@ -13,27 +13,11 @@ use \Drupal\file\Entity\File;
  * Implements hook_install().
  */
 function demo_umami_content_install() {
-  // \Drupal::service('demo_umami_content.migration_runner')->run([
-    // 'demo_umami_content__recipe_category',
-    // 'demo_umami_content__tags',
-    // 'demo_umami_content__images_url',
-    // 'demo_umami_content__media_images_url',
-    // 'demo_umami_content__authors',
-    // 'demo_umami_content__page_authors',
-    // 'demo_umami_content__pages',
-    // 'demo_umami_content__recipes',
-    // 'demo_umami_content__article_authors',
-    // 'demo_umami_content__article_tags',
-    // 'demo_umami_content__article',
-    // 'demo_umami_content__article_images_url',
-    // 'demo_umami_content__article_media_images_url',
-  // ]);
-
-  // Install defaut Articles.
+  // Install default articles.
   _install_demo_umami_content_articles();
-  // Install default Recpies.
+  // Install default recipes.
   _install_demo_umami_content_recpies();
-  // Install default Pages.
+  // Install default pages.
   _install_demo_umami_content_pages();
 }
 
@@ -42,21 +26,6 @@ function demo_umami_content_install() {
  */
 function demo_umami_content_uninstall() {
   // @TODO: Remove data (demo_umami_content_install()) when uninstalling?
-  // \Drupal::service('demo_umami_content.migration_runner')->remove([
-    // 'demo_umami_content__recipe_category',
-    // 'demo_umami_content__tags',
-//    'demo_umami_content__images_url',
-//    'demo_umami_content__media_images_url',
-    // 'demo_umami_content__authors',
-    // 'demo_umami_content__page_authors',
-    // 'demo_umami_content__pages',
-    // 'demo_umami_content__recipes',
-    // 'demo_umami_content__article_authors',
-    // 'demo_umami_content__article_tags',
-    // 'demo_umami_content__article',
-//    'demo_umami_content__article_images_url',
-//    'demo_umami_content__article_media_images_url',
-  // ]);
 }
 
 function _install_demo_umami_content_pages() {
@@ -176,8 +145,6 @@ function _install_demo_umami_content_recpies() {
           $values['field_tags'][] = ['target_id' => _get_term($term)];
         }
       }
-
-
 
       $node = \Drupal\node\Entity\Node::create($values) ;
       $node->save();
