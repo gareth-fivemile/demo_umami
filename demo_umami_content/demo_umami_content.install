@@ -4,45 +4,253 @@
  * @file
  * Module installation file.
  */
+use \Drupal\node\Entity\Node;
+use \Drupal\taxonomy\Entity\Term;
+use \Drupal\user\Entity\User;
+use \Drupal\file\Entity\File;
 
 /**
  * Implements hook_install().
  */
 function demo_umami_content_install() {
-  \Drupal::service('demo_umami_content.migration_runner')->run([
-    'demo_umami_content__recipe_category',
-    'demo_umami_content__tags',
-    // 'demo_umami_content__images_url',
-    // 'demo_umami_content__media_images_url',
-    'demo_umami_content__authors',
-    'demo_umami_content__page_authors',
-    'demo_umami_content__pages',
-    'demo_umami_content__recipes',
-    'demo_umami_content__article_authors',
-    'demo_umami_content__article_tags',
-    'demo_umami_content__article',
-    // 'demo_umami_content__article_images_url',
-    // 'demo_umami_content__article_media_images_url',
-  ]);
+  // Install default articles.
+  _install_demo_umami_content_articles();
+  // Install default recipes.
+  _install_demo_umami_content_recpies();
+  // Install default pages.
+  _install_demo_umami_content_pages();
 }
 
 /**
  * Implements hook_uninstall().
  */
 function demo_umami_content_uninstall() {
-  \Drupal::service('demo_umami_content.migration_runner')->remove([
-    'demo_umami_content__recipe_category',
-    'demo_umami_content__tags',
-//    'demo_umami_content__images_url',
-//    'demo_umami_content__media_images_url',
-    'demo_umami_content__authors',
-    'demo_umami_content__page_authors',
-    'demo_umami_content__pages',
-    'demo_umami_content__recipes',
-    'demo_umami_content__article_authors',
-    'demo_umami_content__article_tags',
-    'demo_umami_content__article',
-//    'demo_umami_content__article_images_url',
-//    'demo_umami_content__article_media_images_url',
+  // @TODO: Remove data (demo_umami_content_install()) when uninstalling?
+}
+
+function _install_demo_umami_content_pages() {
+  $module_handler = Drupal::service('module_handler');
+  // Default page content location.
+  $pages = '/default_content/pages.csv';
+  $path = $module_handler->getModule('demo_umami_content')->getPath() . $pages;
+
+  $records = 0;
+  if (($handle = fopen($path, "r")) !== FALSE) {
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $records++;
+      if ($records == 1) {
+        // Skip CSV Header.
+        continue;
+      }
+
+      // Prepare content.
+      $values = [
+        'type' => 'page',
+        'title' => $data[0],
+      ];
+      // Fields mapping starts.
+      // Set Body Field.
+      if (!empty($data[1])) {
+        $values['body'] = [['value' => $data[1], 'format' => 'basic_html']];
+      }
+      // Set node alias if exists.
+      if (!empty($data[3])) {
+        $values['path'] = [['alias' => '/' . $data[3]]];
+      }
+      // Set article author.
+      if (!empty($data[2])) {
+        $values['uid'] = _get_user($data[2]);
+      }
+
+      // Create Node.
+      $node = Node::create($values) ;
+      $node->save();
+    }
+    fclose($handle);
+  }
+}
+
+function _install_demo_umami_content_recpies() {
+  $module_handler = Drupal::service('module_handler');
+  $recipes = '/default_content/recipes.csv';
+  $path = $module_handler->getModule('demo_umami_content')->getPath() . $recipes;
+
+  $records = 0;
+  if (($handle = fopen($path, "r")) !== FALSE) {
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $records++;
+      if ($records == 1) {
+        // Skip Headers.
+        continue;
+      }
+
+      $values = [
+        'type' => 'recipe',
+        'title' => $data[0], // Title field.
+      ];
+      // Set article author.
+      if (!empty($data[3])) {
+        $values['uid'] = _get_user($data[3]);
+      }
+      // Set field_image field.
+      if (!empty($data[1])) {
+        $path = $module_handler->getModule('demo_umami_content')->getPath() . '/default_content/images/' . $data[1];
+        $values['field_image'] = ['target_id' => _get_image_file($path)];
+      }
+      // Set field_summary Field.
+      if (!empty($data[2])) {
+        $values['field_summary'] = [['value' => $data[2], 'format' => 'basic_html']];
+      }
+      // Set field_recipe_category if exists.
+      if (!empty($data[4])) {
+        $values['field_recipe_category'] = [];
+        $tags = array_filter(explode(',', $data[4]));
+        foreach ($tags as $term ) {
+          $values['field_recipe_category'][] = ['target_id' => _get_term($term, 'recipe_category')];
+        }
+      }
+      // Set field_preparation_time Field.
+      if (!empty($data[5])) {
+        $values['field_preparation_time'] = [['value' => $data[5]]];
+      }
+      // Set field_cooking_time Field.
+      if (!empty($data[6])) {
+        $values['field_cooking_time'] = [['value' => $data[6]]];
+      }
+      // Set field_difficulty Field.
+      if (!empty($data[8])) {
+        $values['field_difficulty'] = $data[8];
+      }
+      // Set field_number_of_servings Field.
+      if (!empty($data[11])) {
+        $values['field_number_of_servings'] = [['value' => $data[11]]];
+      }
+      // Set field_ingredients Field.
+      if (!empty($data[9])) {
+        $ingredients = explode(',', $data[9]);
+        $values['field_ingredients'] = [];
+        foreach ($ingredients as $ingredient) {
+          $values['field_ingredients'][] = ['value' => $ingredient];
+        }
+      }
+      // Set field_recipe_instruction Field.
+      if (!empty($data[10])) {
+        $values['field_recipe_instruction'] = [['value' => $data[10], 'format' => 'basic_html']];
+      }
+      // Set field_tags if exists.
+      if (!empty($data[12])) {
+        $values['field_tags'] = [];
+        $tags = array_filter(explode(',', $data[12]));
+        foreach ($tags as $term ) {
+          $values['field_tags'][] = ['target_id' => _get_term($term)];
+        }
+      }
+
+      $node = \Drupal\node\Entity\Node::create($values) ;
+      $node->save();
+    }
+    fclose($handle);
+  }
+}
+
+function _install_demo_umami_content_articles() {
+  $module_handler = Drupal::service('module_handler');
+  // Default article location.
+  $articles = '/default_content/articles.csv';
+  $path = $module_handler->getModule('demo_umami_content')->getPath() . $articles;
+
+  $records = 0;
+  if (($handle = fopen($path, "r")) !== FALSE) {
+    while (($data = fgetcsv($handle)) !== FALSE) {
+      $records++;
+      if ($records == 1) {
+        // Skip CSV Header.
+        continue;
+      }
+
+      // Prepare content.
+      $values = [
+        'type' => 'article',
+        'title' => $data[0],
+      ];
+      // Fields mapping starts.
+      // Set Body Field.
+      if (!empty($data[1])) {
+        $values['body'] = [['value' => $data[1], 'format' => 'basic_html']];
+      }
+      // Set node alias if exists.
+      if (!empty($data[3])) {
+        $values['path'] = [['alias' => '/' . $data[3]]];
+      }
+      // Set field_tags if exists.
+      if (!empty($data[5])) {
+        $values['field_tags'] = [];
+        $tags = explode(',', $data[5]);
+        foreach ($tags as $term ) {
+          $values['field_tags'][] = ['target_id' => _get_term($term)];
+        }
+      }
+      // Set article author.
+      if (!empty($data[2])) {
+        $values['uid'] = _get_user($data[2]);
+      }
+      // Set Image field.
+      if (!empty($data[4])) {
+        $path = $module_handler->getModule('demo_umami_content')->getPath() . '/default_content/images/' . $data[4];
+        $values['field_image'] = ['target_id' => _get_image_file($path)];
+      }
+
+      // Create Node.
+      $node = Node::create($values) ;
+      $node->save();
+    }
+    fclose($handle);
+  }
+}
+
+/**
+* Retrieves a tid for use from taxonomy.
+*/
+function _get_term($term, $vocabulary = 'tags') {
+  if ($terms = taxonomy_term_load_multiple_by_name($term, $vocabulary)) {
+    $term = reset($terms);
+  }
+  else {
+    $term = Term::create([
+      'name' => $term,
+      'vid' => $vocabulary,
+    ]);
+    $term->save();
+  }
+  return $term->id();
+}
+
+/**
+ * Retrives uid from User Name.
+ */
+function _get_user($name) {
+  $user = user_load_by_name($name);
+  if (empty($user)) {
+    // Creating user without any email/password.
+    $user = User::create([
+      'name' => $name,
+    ]);
+    $user->enforceIsNew();
+    $user->save();
+  }
+  return $user->id();
+}
+
+/**
+ * Creates Image File entity & returns ID.
+ */
+function _get_image_file($path) {
+  $filename = basename($path);
+  $uri  = file_unmanaged_copy($path, 'public://' . $filename, FILE_EXISTS_REPLACE);
+  $file = File::create([
+    'uri' => $uri,
+    'status' => 1,
   ]);
+  $file->save();
+  return $file->id();
 }
