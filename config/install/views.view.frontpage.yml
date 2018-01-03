@@ -8,6 +8,7 @@ dependencies:
   module:
     - node
     - user
+_core:
 id: frontpage
 label: Frontpage
 module: node
@@ -315,6 +316,7 @@ display:
           relationship: none
           view_mode: rss
       display_extenders: {  }
+      enabled: false
     cache_metadata:
       contexts:
         - 'languages:language_interface'
