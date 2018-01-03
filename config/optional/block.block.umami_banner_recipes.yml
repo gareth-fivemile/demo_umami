@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - demo_umami_content
     - system
   theme:
     - umami
@@ -15,7 +14,7 @@ plugin: umami_recipes_banner_temp
 settings:
   id: umami_recipes_banner_temp
   label: 'Temporary: Umami Recipes Banner'
-  provider: demo_umami_content
+  provider: demo_umami
   label_display: '0'
 visibility:
   request_path:
