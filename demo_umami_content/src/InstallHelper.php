@@ -61,6 +61,7 @@ class InstallHelper implements ContainerInjectionInterface {
       $container->get('state')
     );
   }
+
   /**
    * Imports articles.
    *
@@ -92,7 +93,7 @@ class InstallHelper implements ContainerInjectionInterface {
         if (!empty($data['tags'])) {
           $values['field_tags'] = [];
           $tags = explode(',', $data['tags']);
-          foreach ($tags as $term ) {
+          foreach ($tags as $term) {
             $values['field_tags'][] = ['target_id' => $this->getTerm($term)];
           }
         }
@@ -132,7 +133,8 @@ class InstallHelper implements ContainerInjectionInterface {
         $data = array_combine($header, $data);
         $values = [
           'type' => 'recipe',
-          'title' => $data['title'], // Title field.
+        // Title field.
+          'title' => $data['title'],
         ];
         // Set article author.
         if (!empty($data['author'])) {
@@ -155,7 +157,7 @@ class InstallHelper implements ContainerInjectionInterface {
         if (!empty($data['recipe_category'])) {
           $values['field_recipe_category'] = [];
           $tags = array_filter(explode(',', $data['recipe_category']));
-          foreach ($tags as $term ) {
+          foreach ($tags as $term) {
             $values['field_recipe_category'][] = ['target_id' => $this->getTerm($term, 'recipe_category')];
           }
         }
@@ -191,12 +193,12 @@ class InstallHelper implements ContainerInjectionInterface {
         if (!empty($data['tags'])) {
           $values['field_tags'] = [];
           $tags = array_filter(explode(',', $data['tags']));
-          foreach ($tags as $term ) {
+          foreach ($tags as $term) {
             $values['field_tags'][] = ['target_id' => $this->getTerm($term)];
           }
         }
 
-        $node = $this->entityTypeManager->getStorage('node')->create($values) ;
+        $node = $this->entityTypeManager->getStorage('node')->create($values);
         $node->save();
         $uuids[$node->uuid()] = 'node';
       }
@@ -244,6 +246,40 @@ class InstallHelper implements ContainerInjectionInterface {
       }
       $this->storeCreatedContentUuids($uuids);
       fclose($handle);
+    }
+    return $this;
+  }
+
+  /**
+   * Imports block contents.
+   *
+   * @return $this
+   */
+  public function importBlockContent() {
+    $block_content_metadata = [
+      'umami_recipes_banner' => [
+        'uuid' => '4c7d58a3-a45d-412d-9068-259c57e40541',
+        'info' => 'Umami Recipes Banner',
+        'type' => 'banner_block',
+        'field_title' => [
+          'value' => 'Baked Camembert with garlic, calvados and salami',
+        ],
+        'field_content_link' => [
+          'target_id' => 10,
+        ],
+        'field_summary' => [
+          'value' => 'Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+        ],
+        'field_banner_image' => [
+          'target_id' => $this->getImage(drupal_get_path('theme', 'umami') . '/' . 'images/jpg/placeholder--atharva-lele-210748-pshopped.jpg'),
+        ],
+      ],
+    ];
+
+    // Create block content.
+    foreach ($block_content_metadata as $block) {
+      $block_content = $this->entityTypeManager->getStorage('block_content')->create($block);
+      $block_content->save();
     }
     return $this;
   }
