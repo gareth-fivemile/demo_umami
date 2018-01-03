@@ -12,4 +12,3 @@ dependencies:
   - taxonomy
   - text
   - user
-  - migrate
