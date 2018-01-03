@@ -1,4 +1,0 @@
-services:
-  demo_umami_content.migration_runner:
-    class: Drupal\demo_umami_content\MigrationRunner
-    arguments: ['@plugin.manager.migration']

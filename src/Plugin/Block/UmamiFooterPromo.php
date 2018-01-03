@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\demo_umami_content\Plugin\Block;
+namespace Drupal\demo_umami\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
