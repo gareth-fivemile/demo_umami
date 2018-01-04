@@ -137,6 +137,10 @@ class InstallHelper implements ContainerInjectionInterface {
         if (!empty($data['author'])) {
           $values['uid'] = $this->getUser($data['author']);
         }
+        // Set node alias if exists.
+        if (!empty($data['slug'])) {
+          $values['path'] = [['alias' => '/' . $data['slug']]];
+        }
         // Set field_image field.
         if (!empty($data['image'])) {
           $image_path = $module_path . '/default_content/images/' . $data['image'];
