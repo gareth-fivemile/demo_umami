@@ -18,6 +18,6 @@ settings:
     value: '<strong>Umami Magazine & Umami Publications</strong> is a fictional magazine and publisher for illustrative purposes only.'
     format: 'basic_html'
   umami_copyright:
-    value: '&copy; 2017 Terms & Conditions'
+    value: '&copy; 2018 Terms & Conditions'
     format: 'basic_html'
 visibility: {  }
