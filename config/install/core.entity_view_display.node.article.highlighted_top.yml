@@ -23,7 +23,7 @@ content:
     region: content
     settings:
       responsive_image_style: 3_2_image
-      image_link: ''
+      image_link: content
     third_party_settings: {  }
     label: hidden
 hidden:
