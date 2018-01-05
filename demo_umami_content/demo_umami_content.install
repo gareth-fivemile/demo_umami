@@ -11,14 +11,18 @@ use Drupal\demo_umami_content\InstallHelper;
  * Implements hook_install().
  */
 function demo_umami_content_install() {
-  \Drupal::classResolver()->getInstanceFromDefinition(InstallHelper::class)->importArticles()
-    ->importRecipes()
-    ->importPages();
+  if (!\Drupal::service('config.installer')->isSyncing()) {
+    \Drupal::classResolver()->getInstanceFromDefinition(InstallHelper::class)->importArticles()
+      ->importRecipes()
+      ->importPages();
+  }
 }
 
 /**
  * Implements hook_uninstall().
  */
 function demo_umami_content_uninstall() {
-  \Drupal::classResolver()->getInstanceFromDefinition(InstallHelper::class)->deleteImportedContent();
+  if (!\Drupal::service('config.installer')->isSyncing()) {
+    \Drupal::classResolver()->getInstanceFromDefinition(InstallHelper::class)->deleteImportedContent();
+  }
 }
