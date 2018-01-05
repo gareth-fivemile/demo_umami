@@ -15,7 +15,7 @@ dependencies:
     - field.field.node.recipe.field_summary
     - field.field.node.recipe.field_tags
     - node.type.recipe
-    - responsive_image.styles.square_image
+    - responsive_image.styles.3_2_image
   module:
     - options
     - responsive_image
@@ -37,7 +37,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      responsive_image_style: square_image
+      responsive_image_style: 3_2_image
       image_link: content
     third_party_settings: {  }
     type: responsive_image
