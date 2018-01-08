@@ -21,7 +21,6 @@ dependencies:
     - responsive_image
     - text
     - user
-_core:
 id: node.recipe.full
 targetEntityType: node
 bundle: recipe
@@ -65,7 +64,7 @@ content:
     label: above
     settings:
       thousand_separator: ''
-      prefix_suffix: true
+      prefix_suffix: false
     third_party_settings: {  }
     type: number_integer
     region: content
