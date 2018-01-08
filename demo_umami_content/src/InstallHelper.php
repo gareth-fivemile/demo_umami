@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\State\StateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Component\Utility\Html;
 
 /**
  * Defines a helper class for importing default content.
@@ -314,6 +315,7 @@ class InstallHelper implements ContainerInjectionInterface {
       $term = $term_storage->create([
         'name' => $term_name,
         'vid' => $vocabulary_id,
+        'path' => ['alias' => '/' . Html::getClass($vocabulary_id) . '/' . Html::getClass($term_name)],
       ]);
       $term->save();
       $this->storeCreatedContentUuids([$term->uuid() => 'taxonomy_term']);
