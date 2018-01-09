@@ -10,6 +10,29 @@ use Drupal\user\RoleInterface;
 use Drupal\shortcut\Entity\Shortcut;
 
 /**
+ * Implements hook_requirements().
+ */
+function demo_umami_requirements($phase) {
+  $requirements = [];
+  if ($phase == 'runtime') {
+    $demo_umami_installed_drupal = \Drupal::state()->get('demo_umami_drupal_version');
+
+    $requirements['demo_umami_drupal_version'] = [
+      'title' => 'Demo Umami Drupal Version',
+      'value' => \Drupal::VERSION,
+      'description' => 'Demo Umami is an experimental profile and not to be used in Production(Live) site. Drupal Upgrade is not recomended.',
+      'severity' => REQUIREMENT_WARNING,
+    ];
+
+    // Check if Drupal version has changed since demo_umami was installed.
+    if ($demo_umami_installed_drupal != \Drupal::VERSION) {
+      $requirements['demo_umami_drupal_version']['severity'] = REQUIREMENT_ERROR;
+    }
+  }
+  return $requirements;
+}
+
+/**
  * Implements hook_install().
  *
  * Perform actions to set up the site for this profile.
@@ -72,4 +95,7 @@ function demo_umami_install() {
   // in the demo_umami.info.yml file, as it requires configuration provided by
   // the profile (fields etc.).
   \Drupal::service('module_installer')->install(['demo_umami_content'], TRUE);
+
+  // Storing Drupal version on demo_umami install.
+  \Drupal::state()->set('demo_umami_drupal_version', \Drupal::VERSION);
 }
