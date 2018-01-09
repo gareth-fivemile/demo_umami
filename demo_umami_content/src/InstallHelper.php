@@ -265,8 +265,13 @@ class InstallHelper implements ContainerInjectionInterface {
           'value' => 'Baked Camembert with garlic, calvados and salami',
         ],
         'field_content_link' => [
-          'target_id' => 10,
-        ],
+          'target_id' => call_user_func(function () {
+            // @TODO: Change the title to 'Baked Camember' recipe node is in.
+            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Glorious salad']);
+            $node = reset($nodes);
+            return $node->id();
+          }),
+          ],
         'field_summary' => [
           'value' => 'Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.',
         ],
@@ -280,6 +285,7 @@ class InstallHelper implements ContainerInjectionInterface {
     foreach ($block_content_metadata as $block) {
       $block_content = $this->entityTypeManager->getStorage('block_content')->create($block);
       $block_content->save();
+      $this->storeCreatedContentUuids([$block_content->uuid() => 'block_content']);
     }
     return $this;
   }
