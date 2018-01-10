@@ -406,7 +406,8 @@ class InstallHelper implements ContainerInjectionInterface {
    * @param string $path
    *   Path to image.
    *
-   * @return bool|null
+   * @return string|false
+   *   The path to the new file, or FALSE in the event of an error.
    */
   protected function fileUnmanagedCopy($path) {
     $filename = basename($path);
