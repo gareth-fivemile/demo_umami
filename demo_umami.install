@@ -17,16 +17,21 @@ function demo_umami_requirements($phase) {
   if ($phase == 'runtime') {
     $demo_umami_installed_drupal = \Drupal::state()->get('demo_umami_drupal_version');
 
-    $requirements['demo_umami_drupal_version'] = [
-      'title' => 'Demo Umami Drupal Version',
+    $requirements['experimental_profile_used'] = [
+      'title' => t('Experimental profile used'),
       'value' => \Drupal::VERSION,
-      'description' => 'Demo Umami is an experimental profile and not to be used in Production(Live) site. Drupal Upgrade is not recomended.',
+      'description' => t('Demo Umami is an experimental profile to be used for demonstration purposes only, and should not be used for a production/live site. To start building a new site, you should re-install Drupal and choose another profile, for example "Standard".'),
       'severity' => REQUIREMENT_WARNING,
     ];
 
     // Check if Drupal version has changed since demo_umami was installed.
     if ($demo_umami_installed_drupal != \Drupal::VERSION) {
-      $requirements['demo_umami_drupal_version']['severity'] = REQUIREMENT_ERROR;
+      $requirements['demo_umami_drupal_version'] = [
+        'title' => t('Demo Umami Drupal Version'),
+        'value' => \Drupal::VERSION,
+        'description' => t('Drupal has been updated since this demo was installed, which could cause issues with this site. It is recommended that you re-install the demo to evaluate the latest changes.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
     }
   }
   return $requirements;
@@ -96,6 +101,6 @@ function demo_umami_install() {
   // the profile (fields etc.).
   \Drupal::service('module_installer')->install(['demo_umami_content'], TRUE);
 
-  // Storing Drupal version on demo_umami install.
+  // Store the version of Drupal installed.
   \Drupal::state()->set('demo_umami_drupal_version', \Drupal::VERSION);
 }
