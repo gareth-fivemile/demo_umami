@@ -12,9 +12,12 @@ use Drupal\demo_umami_content\InstallHelper;
  */
 function demo_umami_content_install() {
   if (!\Drupal::service('config.installer')->isSyncing()) {
-    \Drupal::classResolver()->getInstanceFromDefinition(InstallHelper::class)->importArticles()
+    \Drupal::classResolver()
+      ->getInstanceFromDefinition(InstallHelper::class)
+      ->importArticles()
       ->importRecipes()
-      ->importPages();
+      ->importPages()
+      ->importBlockContent();
   }
 }
 

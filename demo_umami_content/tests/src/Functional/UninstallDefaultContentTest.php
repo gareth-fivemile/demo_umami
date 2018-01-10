@@ -21,6 +21,13 @@ class UninstallDefaultContentTest extends BrowserTestBase {
    * Tests uninstalling content removes created entities.
    */
   public function testReinstall() {
+    $module_installer = $this->container->get('module_installer');
+
+    // Test imported blocks on profile install.
+    $block_storage = $this->container->get('entity_type.manager')->getStorage('block_content');
+    $this->assertImportedCustomBlock($block_storage);
+
+    // Test imported nodes on profile install.
     $node_storage = $this->container->get('entity_type.manager')->getStorage('node');
     $this->assertRecipesImported($node_storage);
 
@@ -30,22 +37,39 @@ class UninstallDefaultContentTest extends BrowserTestBase {
       ->execute();
     $this->assertGreaterThan(0, $count);
 
-    $module_installer = $this->container->get('module_installer');
+    // Uninstall the module.
     $module_installer->uninstall(['demo_umami_content']);
 
+    // Reset storage cache.
+    $block_storage->resetCache();
     $node_storage->resetCache();
+
+    // Assert the removal of blocks on uninstall.
+    $count = $block_storage->getQuery()
+      ->condition('type', 'banner_block')
+      ->count()
+      ->execute();
+    $this->assertEquals(0, $count);
+    $this->assertNull($this->container->get('entity_type.manager')->getStorage('block')->load('umamirecipesbanner'));
+
+    // Assert the removal of nodes on uninstall.
     $count = $node_storage->getQuery()
       ->condition('type', 'article')
       ->count()
       ->execute();
     $this->assertEquals(0, $count);
+
     $count = $node_storage->getQuery()
       ->condition('type', 'recipe')
       ->count()
       ->execute();
     $this->assertEquals(0, $count);
+
+    // Re-install and assert imported content.
     $module_installer->install(['demo_umami_content']);
     $this->assertRecipesImported($node_storage);
+    $this->assertImportedCustomBlock($block_storage);
+
   }
 
   /**
@@ -62,6 +86,27 @@ class UninstallDefaultContentTest extends BrowserTestBase {
     $this->assertGreaterThan(0, $count);
     $nodes = $node_storage->loadByProperties(['title' => 'Cheesy smoked cod with mushrooms and pasta']);
     $this->assertCount(1, $nodes);
+  }
+
+  /**
+   * Assert block content are imported.
+   *
+   * @param \Drupal\Core\Entity\EntityStorageInterface $block_storage
+   *   Block storage.
+   */
+  protected function assertImportedCustomBlock(EntityStorageInterface $block_storage) {
+    // Verify that block is placed.
+    $assert = $this->assertSession();
+    $this->drupalGet('/recipes');
+    $assert->pageTextContains('Baked Camembert with garlic, calvados and salami');
+
+    $count = $block_storage->getQuery()
+      ->condition('type', 'banner_block')
+      ->count()
+      ->execute();
+    $this->assertGreaterThan(0, $count);
+    $block = $block_storage->loadByProperties(['uuid' => '4c7d58a3-a45d-412d-9068-259c57e40541']);
+    $this->assertCount(1, $block);
   }
 
 }
