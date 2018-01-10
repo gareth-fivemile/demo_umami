@@ -267,7 +267,7 @@ class InstallHelper implements ContainerInjectionInterface {
         'field_content_link' => [
           'target_id' => call_user_func(function () {
             // @TODO: Change the title to 'Baked Camember' recipe node is in.
-            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Glorious salad']);
+            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Thai green curry']);
             $node = reset($nodes);
             return $node->id();
           }),
