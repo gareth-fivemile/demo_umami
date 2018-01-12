@@ -36,7 +36,7 @@ function demo_umami_toolbar() {
     '#type' => 'toolbar_item',
     'tab' => array(
       '#type' => 'inline_template',
-      '#template' => '<a class="toolbar-warning" href="{{ more_info_link }}">This demo is for testing purposes only.</a>',
+      '#template' => '<a class="toolbar-warning" href="{{ more_info_link }}">This installation is for demonstration purposes only.</a>',
       '#context' => [
         'more_info_link' => 'https://www.drupal.org/project/drupal/issues/2829101',
       ],
