@@ -256,27 +256,27 @@ class InstallHelper implements ContainerInjectionInterface {
    * @return $this
    */
   public function importBlockContent() {
+    $module_path = $this->moduleHandler->getModule('demo_umami_content')->getPath();
     $block_content_metadata = [
       'umami_recipes_banner' => [
         'uuid' => '4c7d58a3-a45d-412d-9068-259c57e40541',
         'info' => 'Umami Recipes Banner',
         'type' => 'banner_block',
         'field_title' => [
-          'value' => 'Baked Camembert with garlic, calvados and salami',
+          'value' => 'Veggie pasta bake',
         ],
         'field_content_link' => [
           'target_id' => call_user_func(function () {
-            // @TODO: Change the title to 'Baked Camember' recipe node is in.
-            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Thai green curry']);
+            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Veggie pasta bake']);
             $node = reset($nodes);
             return $node->id();
           }),
           ],
         'field_summary' => [
-          'value' => 'Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+          'value' => 'A wholesome pasta bake is the ultimate comfort food. For any ferocious carnivore, bacon can be added with the onions and garlic for extra flavour.',
         ],
         'field_banner_image' => [
-          'target_id' => $this->getImage(drupal_get_path('theme', 'umami') . '/' . 'images/jpg/placeholder--atharva-lele-210748-pshopped.jpg'),
+          'target_id' => $this->getImage($module_path . '/default_content/images/veggie-pasta-bake-hero-umami.jpg'),
         ],
       ],
     ];
