@@ -104,7 +104,10 @@ class InstallHelper implements ContainerInjectionInterface {
         // Set Image field.
         if (!empty($data['image'])) {
           $path = $module_path . '/default_content/images/' . $data['image'];
-          $values['field_image'] = ['target_id' => $this->getImage($path)];
+          $values['field_image'] = [
+            'target_id' => $this->getImage($path),
+            'alt' => $data['alt'],
+          ];
         }
 
         // Create Node.
@@ -147,7 +150,10 @@ class InstallHelper implements ContainerInjectionInterface {
         // Set field_image field.
         if (!empty($data['image'])) {
           $image_path = $module_path . '/default_content/images/' . $data['image'];
-          $values['field_image'] = ['target_id' => $this->getImage($image_path)];
+          $values['field_image'] = [
+            'target_id' => $this->getImage($image_path),
+            'alt' => $data['alt'],
+          ];
         }
         // Set field_summary Field.
         if (!empty($data['summary'])) {
