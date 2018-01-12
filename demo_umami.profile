@@ -24,3 +24,27 @@ function demo_umami_form_install_configure_submit($form, FormStateInterface $for
   $site_mail = $form_state->getValue('site_mail');
   ContactForm::load('feedback')->setRecipients([$site_mail])->trustData()->save();
 }
+
+/**
+ * Implements hook_toolbar().
+ */
+function demo_umami_toolbar() {
+  // Add a warning about using an experimental profile.
+  // @todo: This can be removed once a generic warning for experimental profiles has been introduced.
+  // @see https://www.drupal.org/project/drupal/issues/2934374
+  $items['experimental-profile-warning'] = array(
+    '#type' => 'toolbar_item',
+    'tab' => array(
+      '#type' => 'inline_template',
+      '#template' => '<a class="toolbar-warning" href="{{ more_info_link }}">This demo is for testing purposes only.</a>',
+      '#context' => [
+        'more_info_link' => 'https://www.drupal.org/project/drupal/issues/2829101',
+      ],
+      '#attached' => [
+        'library' => ['demo_umami/toolbar-warning'],
+      ],
+    ),
+    '#weight' => 999,
+  );
+  return $items;
+}
