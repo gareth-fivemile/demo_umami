@@ -263,17 +263,17 @@ class InstallHelper implements ContainerInjectionInterface {
         'info' => 'Umami Recipes Banner',
         'type' => 'banner_block',
         'field_title' => [
-          'value' => 'Veggie pasta bake',
+          'value' => 'Super easy vegetarian pasta bake',
         ],
         'field_content_link' => [
           'target_id' => call_user_func(function () {
-            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Veggie pasta bake']);
+            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Super easy vegetarian pasta bake']);
             $node = reset($nodes);
             return $node->id();
           }),
           ],
         'field_summary' => [
-          'value' => 'A wholesome pasta bake is the ultimate comfort food. For any ferocious carnivore, bacon can be added with the onions and garlic for extra flavour.',
+          'value' => 'A wholesome pasta bake is the ultimate comfort food. This delicious bake is super quick to prepare and an ideal midweek meal for all the family.',
         ],
         'field_banner_image' => [
           'target_id' => $this->getImage($module_path . '/default_content/images/veggie-pasta-bake-hero-umami.jpg'),
