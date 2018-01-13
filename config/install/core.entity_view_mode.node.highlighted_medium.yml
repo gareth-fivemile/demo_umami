@@ -1,0 +1,10 @@
+uuid: 10689872-87f2-4e30-bbd8-6ec1b450c03a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.highlighted_medium
+label: 'Highlighted Medium'
+targetEntityType: node
+cache: true
