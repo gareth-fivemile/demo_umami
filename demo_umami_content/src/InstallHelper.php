@@ -272,11 +272,12 @@ class InstallHelper implements ContainerInjectionInterface {
           'value' => 'Super easy vegetarian pasta bake',
         ],
         'field_content_link' => [
-          'target_id' => call_user_func(function () {
+          'uri' => 'internal:' . call_user_func(function () {
             $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Super easy vegetarian pasta bake']);
             $node = reset($nodes);
-            return $node->id();
+            return $node->toUrl()->toString();
           }),
+          'title' => 'Super easy vegetarian pasta bake',
           ],
         'field_summary' => [
           'value' => 'A wholesome pasta bake is the ultimate comfort food. This delicious bake is super quick to prepare and an ideal midweek meal for all the family.',
