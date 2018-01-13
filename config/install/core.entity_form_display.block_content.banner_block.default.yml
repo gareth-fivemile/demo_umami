@@ -10,13 +10,14 @@ dependencies:
     - image.style.thumbnail
   module:
     - image
+    - link
 id: block_content.banner_block.default
 targetEntityType: block_content
 bundle: banner_block
 mode: default
 content:
   field_banner_image:
-    weight: 30
+    weight: 4
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -24,16 +25,15 @@ content:
     type: image_image
     region: content
   field_content_link:
-    weight: 29
+    weight: 3
     settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: link_default
     region: content
   field_summary:
-    weight: 28
+    weight: 2
     settings:
       rows: 5
       placeholder: ''
@@ -41,7 +41,7 @@ content:
     type: string_textarea
     region: content
   field_title:
-    weight: 27
+    weight: 1
     settings:
       size: 60
       placeholder: ''
@@ -50,7 +50,7 @@ content:
     region: content
   info:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60

@@ -10,6 +10,7 @@ dependencies:
     - image.style.scale_crop_7_3_large
   module:
     - image
+    - link
 id: block_content.banner_block.default
 targetEntityType: block_content
 bundle: banner_block
@@ -28,9 +29,13 @@ content:
     weight: 3
     label: hidden
     settings:
-      link: true
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
     third_party_settings: {  }
-    type: entity_reference_label
+    type: link
     region: content
   field_summary:
     weight: 2
