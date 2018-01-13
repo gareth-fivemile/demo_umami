@@ -104,7 +104,10 @@ class InstallHelper implements ContainerInjectionInterface {
         // Set Image field.
         if (!empty($data['image'])) {
           $path = $module_path . '/default_content/images/' . $data['image'];
-          $values['field_image'] = ['target_id' => $this->getImage($path)];
+          $values['field_image'] = [
+            'target_id' => $this->getImage($path),
+            'alt' => $data['alt'],
+          ];
         }
 
         // Create Node.
@@ -147,7 +150,10 @@ class InstallHelper implements ContainerInjectionInterface {
         // Set field_image field.
         if (!empty($data['image'])) {
           $image_path = $module_path . '/default_content/images/' . $data['image'];
-          $values['field_image'] = ['target_id' => $this->getImage($image_path)];
+          $values['field_image'] = [
+            'target_id' => $this->getImage($image_path),
+            'alt' => $data['alt'],
+          ];
         }
         // Set field_summary Field.
         if (!empty($data['summary'])) {
@@ -256,27 +262,27 @@ class InstallHelper implements ContainerInjectionInterface {
    * @return $this
    */
   public function importBlockContent() {
+    $module_path = $this->moduleHandler->getModule('demo_umami_content')->getPath();
     $block_content_metadata = [
       'umami_recipes_banner' => [
         'uuid' => '4c7d58a3-a45d-412d-9068-259c57e40541',
         'info' => 'Umami Recipes Banner',
         'type' => 'banner_block',
         'field_title' => [
-          'value' => 'Baked Camembert with garlic, calvados and salami',
+          'value' => 'Super easy vegetarian pasta bake',
         ],
         'field_content_link' => [
           'target_id' => call_user_func(function () {
-            // @TODO: Change the title to 'Baked Camember' recipe node is in.
-            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Thai green curry']);
+            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Super easy vegetarian pasta bake']);
             $node = reset($nodes);
             return $node->id();
           }),
           ],
         'field_summary' => [
-          'value' => 'Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.',
+          'value' => 'A wholesome pasta bake is the ultimate comfort food. This delicious bake is super quick to prepare and an ideal midweek meal for all the family.',
         ],
         'field_banner_image' => [
-          'target_id' => $this->getImage(drupal_get_path('theme', 'umami') . '/' . 'images/jpg/placeholder--atharva-lele-210748-pshopped.jpg'),
+          'target_id' => $this->getImage($module_path . '/default_content/images/veggie-pasta-bake-hero-umami.jpg'),
         ],
       ],
     ];
