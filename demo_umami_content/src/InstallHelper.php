@@ -5,6 +5,7 @@ namespace Drupal\demo_umami_content;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Path\AliasManagerInterface;
 use Drupal\Core\State\StateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Component\Utility\Html;
@@ -13,6 +14,13 @@ use Drupal\Component\Utility\Html;
  * Defines a helper class for importing default content.
  */
 class InstallHelper implements ContainerInjectionInterface {
+
+  /**
+   * The path alias manager.
+   *
+   * @var \Drupal\Core\Path\AliasManagerInterface
+   */
+  protected $aliasManager;
 
   /**
    * Entity type manager.
@@ -38,6 +46,8 @@ class InstallHelper implements ContainerInjectionInterface {
   /**
    * Constructs a new InstallHelper object.
    *
+   * @param \Drupal\Core\Path\AliasManagerInterface $aliasManager
+   *   The path alias manager.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   Entity type manager.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
@@ -45,7 +55,8 @@ class InstallHelper implements ContainerInjectionInterface {
    * @param \Drupal\Core\State\StateInterface $state
    *   State service.
    */
-  public function __construct(EntityTypeManagerInterface $entityTypeManager, ModuleHandlerInterface $moduleHandler, StateInterface $state) {
+  public function __construct(AliasManagerInterface $aliasManager, EntityTypeManagerInterface $entityTypeManager, ModuleHandlerInterface $moduleHandler, StateInterface $state) {
+    $this->aliasManager = $aliasManager;
     $this->entityTypeManager = $entityTypeManager;
     $this->moduleHandler = $moduleHandler;
     $this->state = $state;
@@ -56,6 +67,7 @@ class InstallHelper implements ContainerInjectionInterface {
    */
   public static function create(ContainerInterface $container) {
     return new static(
+      $container->get('path.alias_manager'),
       $container->get('entity_type.manager'),
       $container->get('module_handler'),
       $container->get('state')
@@ -275,7 +287,7 @@ class InstallHelper implements ContainerInjectionInterface {
           'uri' => 'internal:' . call_user_func(function () {
             $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Super easy vegetarian pasta bake']);
             $node = reset($nodes);
-            return $node->toUrl()->toString();
+            return $this->aliasManager->getAliasByPath('/node/' . $node->id());
           }),
           'title' => 'Super easy vegetarian pasta bake',
           ],
