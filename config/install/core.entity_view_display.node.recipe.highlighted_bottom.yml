@@ -19,7 +19,6 @@ dependencies:
   module:
     - responsive_image
     - user
-_core:
 id: node.recipe.highlighted_bottom
 targetEntityType: node
 bundle: recipe

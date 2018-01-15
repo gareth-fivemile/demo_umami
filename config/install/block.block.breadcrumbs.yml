@@ -5,7 +5,6 @@ dependencies:
     - system
   theme:
     - umami
-_core:
 id: breadcrumbs
 theme: umami
 region: breadcrumbs

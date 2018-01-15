@@ -20,7 +20,6 @@ dependencies:
     - options
     - responsive_image
     - user
-_core:
 id: node.recipe.highlighted_small
 targetEntityType: node
 bundle: recipe

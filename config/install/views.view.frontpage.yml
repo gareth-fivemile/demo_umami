@@ -8,7 +8,6 @@ dependencies:
   module:
     - node
     - user
-_core:
 id: frontpage
 label: Frontpage
 module: node

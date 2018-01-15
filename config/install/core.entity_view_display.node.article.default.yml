@@ -11,7 +11,6 @@ dependencies:
     - responsive_image
     - text
     - user
-_core:
 id: node.article.default
 targetEntityType: node
 bundle: article
