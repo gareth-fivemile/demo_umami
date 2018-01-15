@@ -84,7 +84,7 @@ class UninstallDefaultContentTest extends BrowserTestBase {
       ->count()
       ->execute();
     $this->assertGreaterThan(0, $count);
-    $nodes = $node_storage->loadByProperties(['title' => 'Cheesy smoked cod with mushrooms and pasta']);
+    $nodes = $node_storage->loadByProperties(['title' => 'Gluten free pizza']);
     $this->assertCount(1, $nodes);
   }
 
@@ -98,7 +98,7 @@ class UninstallDefaultContentTest extends BrowserTestBase {
     // Verify that block is placed.
     $assert = $this->assertSession();
     $this->drupalGet('/recipes');
-    $assert->pageTextContains('Baked Camembert with garlic, calvados and salami');
+    $assert->pageTextContains('Super easy vegetarian pasta bake');
 
     $count = $block_storage->getQuery()
       ->condition('type', 'banner_block')
