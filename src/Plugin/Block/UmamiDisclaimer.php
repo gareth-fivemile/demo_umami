@@ -55,19 +55,19 @@ class UmamiDisclaimer extends BlockBase {
   public function blockForm($form, FormStateInterface $form_state) {
     $form = parent::blockForm($form, $form_state);
 
-    $form['umami_disclaimer'] = array(
+    $form['umami_disclaimer'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Umami Disclaimer'),
       '#default_value' => $this->configuration['umami_disclaimer']['value'],
       '#format' => $this->configuration['umami_disclaimer']['format'],
-    );
+    ];
 
-    $form['umami_copyright'] = array(
+    $form['umami_copyright'] = [
       '#type' => 'text_format',
       '#title' => $this->t('Umami Copyright Text'),
       '#default_value' => $this->configuration['umami_copyright']['value'],
       '#format' => $this->configuration['umami_copyright']['format'],
-    );
+    ];
 
     return $form;
   }

@@ -50,35 +50,35 @@ class UmamiFooterPromo extends BlockBase {
   public function blockForm($form, FormStateInterface $form_state) {
     $form = parent::blockForm($form, $form_state);
 
-    $form['promo_title'] = array(
+    $form['promo_title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Promo Title'),
       '#default_value' => $this->configuration['promo_title'],
-    );
+    ];
 
-    $form['promo_text'] = array(
+    $form['promo_text'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Promo Text'),
       '#default_value' => $this->configuration['promo_text'],
-    );
+    ];
 
-    $form['findmore'] = array(
+    $form['findmore'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Find more'),
-    );
+    ];
 
-    $form['findmore']['url'] = array(
+    $form['findmore']['url'] = [
       '#type' => 'url',
       '#title' => $this->t('URL'),
       '#default_value' => $this->configuration['findmore_url'],
       '#description' => $this->t('Enter an absolute url. Eg: https://www.drupal.org'),
-    );
+    ];
 
-    $form['findmore']['text'] = array(
+    $form['findmore']['text'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Text'),
       '#default_value' => $this->configuration['findmore_text'],
-    );
+    ];
 
     return $form;
   }

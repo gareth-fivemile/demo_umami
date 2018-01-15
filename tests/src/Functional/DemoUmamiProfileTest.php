@@ -34,4 +34,5 @@ class DemoUmamiProfileTest extends BrowserTestBase {
     $this->assertSession()->pageTextContains('Drupal has been updated since this demo was installed, which could cause issues with this site. It is recommended that you re-install the demo to evaluate the latest changes.');
 
   }
+
 }
