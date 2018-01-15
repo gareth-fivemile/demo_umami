@@ -1,6 +1,8 @@
 langcode: en
 status: true
 dependencies:
+  module:
+    - demo_umami
   theme:
     - umami
 id: umami_footer_promo

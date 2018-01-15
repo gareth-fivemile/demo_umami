@@ -50,7 +50,7 @@ class UninstallDefaultContentTest extends BrowserTestBase {
       ->count()
       ->execute();
     $this->assertEquals(0, $count);
-    $this->assertNull($this->container->get('entity_type.manager')->getStorage('block')->load('umamirecipesbanner'));
+    $this->assertNull($this->container->get('entity_type.manager')->getStorage('block')->load('umami_banner_recipes'));
 
     // Assert the removal of nodes on uninstall.
     $count = $node_storage->getQuery()

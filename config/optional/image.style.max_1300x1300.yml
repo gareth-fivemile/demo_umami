@@ -1,3 +1,10 @@
+langcode: en
+dependencies:
+  module:
+    - responsive_image
+  enforced:
+    module:
+      - responsive_image
 name: max_1300x1300
 label: 'Max 1300x1300'
 effects:
@@ -9,10 +16,3 @@ effects:
       upscale: false
     weight: 1
     uuid: 04caae9a-fa3e-4ea6-ae09-9c26aec7d308
-langcode: en
-dependencies:
-  module:
-    - responsive_image
-  enforced:
-    module:
-      - responsive_image
