@@ -12,6 +12,9 @@ use Drupal\Component\Utility\Html;
 
 /**
  * Defines a helper class for importing default content.
+ *
+ * @internal
+ *   This code is only for use by the Umami demo: Content module.
  */
 class InstallHelper implements ContainerInjectionInterface {
 
@@ -117,7 +120,7 @@ class InstallHelper implements ContainerInjectionInterface {
         if (!empty($data['image'])) {
           $path = $module_path . '/default_content/images/' . $data['image'];
           $values['field_image'] = [
-            'target_id' => $this->getImage($path),
+            'target_id' => $this->createFileEntity($path),
             'alt' => $data['alt'],
           ];
         }
@@ -163,7 +166,7 @@ class InstallHelper implements ContainerInjectionInterface {
         if (!empty($data['image'])) {
           $image_path = $module_path . '/default_content/images/' . $data['image'];
           $values['field_image'] = [
-            'target_id' => $this->getImage($image_path),
+            'target_id' => $this->createFileEntity($image_path),
             'alt' => $data['alt'],
           ];
         }
@@ -269,13 +272,13 @@ class InstallHelper implements ContainerInjectionInterface {
   }
 
   /**
-   * Imports block contents.
+   * Imports block content entities.
    *
    * @return $this
    */
   public function importBlockContent() {
     $module_path = $this->moduleHandler->getModule('demo_umami_content')->getPath();
-    $block_content_metadata = [
+    $block_content_entities = [
       'umami_recipes_banner' => [
         'uuid' => '4c7d58a3-a45d-412d-9068-259c57e40541',
         'info' => 'Umami Recipes Banner',
@@ -295,14 +298,14 @@ class InstallHelper implements ContainerInjectionInterface {
           'value' => 'A wholesome pasta bake is the ultimate comfort food. This delicious bake is super quick to prepare and an ideal midweek meal for all the family.',
         ],
         'field_banner_image' => [
-          'target_id' => $this->getImage($module_path . '/default_content/images/veggie-pasta-bake-hero-umami.jpg'),
+          'target_id' => $this->createFileEntity($module_path . '/default_content/images/veggie-pasta-bake-hero-umami.jpg'),
         ],
       ],
     ];
 
     // Create block content.
-    foreach ($block_content_metadata as $block) {
-      $block_content = $this->entityTypeManager->getStorage('block_content')->create($block);
+    foreach ($block_content_entities as $values) {
+      $block_content = $this->entityTypeManager->getStorage('block_content')->create($values);
       $block_content->save();
       $this->storeCreatedContentUuids([$block_content->uuid() => 'block_content']);
     }
@@ -330,7 +333,7 @@ class InstallHelper implements ContainerInjectionInterface {
   }
 
   /**
-   * Looks up a user by name.
+   * Looks up a user by name, if it is missing the user is created.
    *
    * @param string $name
    *   Username.
@@ -356,7 +359,7 @@ class InstallHelper implements ContainerInjectionInterface {
   }
 
   /**
-   * Looks up a term by name.
+   * Looks up a term by name, if it is missing the term is created.
    *
    * @param string $term_name
    *   Term name.
@@ -388,7 +391,7 @@ class InstallHelper implements ContainerInjectionInterface {
   }
 
   /**
-   * Looks up a file entity based on an image path.
+   * Creates a file entity based on an image path.
    *
    * @param string $path
    *   Image path.
@@ -396,7 +399,7 @@ class InstallHelper implements ContainerInjectionInterface {
    * @return int
    *   File ID.
    */
-  protected function getImage($path) {
+  protected function createFileEntity($path) {
     $uri = $this->fileUnmanagedCopy($path);
     $file = $this->entityTypeManager->getStorage('file')->create([
       'uri' => $uri,
