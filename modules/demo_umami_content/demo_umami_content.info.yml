@@ -2,6 +2,7 @@ name: 'Umami demo: Content'
 description: Imports the content for the Umami demo.
 type: module
 core: 8.x
+package: 'Core (Experimental)'
 dependencies:
   - field
   - file
