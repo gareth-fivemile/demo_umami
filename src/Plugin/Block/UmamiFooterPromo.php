@@ -12,6 +12,9 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "umami_footer_promo",
  *   admin_label = @Translation("Umami Bundle")
  * )
+ *
+ * @internal
+ *   This code is only for use by the Umami demo profile.
  */
 class UmamiFooterPromo extends BlockBase {
 

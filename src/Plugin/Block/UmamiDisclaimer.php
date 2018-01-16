@@ -12,6 +12,9 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "umami_disclaimer",
  *   admin_label = @Translation("Umami disclaimer")
  * )
+ *
+ * @internal
+ *   This code is only for use by the Umami demo profile.
  */
 class UmamiDisclaimer extends BlockBase {
 
