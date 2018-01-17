@@ -91,4 +91,21 @@ class DemoUmamiProfileTest extends BrowserTestBase {
     }
   }
 
+  /**
+   * Tests the successful editing of nodes by admin.
+   */
+  public function testEditNodesByAdmin() {
+    $account = $this->drupalCreateUser(['administer nodes', 'edit any recipe content']);
+    $this->drupalLogin($account);
+    $webassert = $this->assertSession();
+
+    // Check that admin is able to edit the node.
+    $nodes = entity_load_multiple_by_properties('node', ['title' => 'Deep mediterranean quiche']);
+    $node = reset($nodes);
+    $this->drupalGet('node/' . $node->id() . '/edit');
+    $webassert->statusCodeEquals('200');
+    $this->submitForm([], "Save");
+    $webassert->pageTextContains('Recipe Deep mediterranean quiche has been updated.');
+  }
+
 }
