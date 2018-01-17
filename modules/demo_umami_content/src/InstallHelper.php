@@ -151,12 +151,13 @@ class InstallHelper implements ContainerInjectionInterface {
         $data = array_combine($header, $data);
         $values = [
           'type' => 'recipe',
-        // Title field.
+          // Title field.
           'title' => $data['title'],
         ];
         // Set article author.
         if (!empty($data['author'])) {
           $values['uid'] = $this->getUser($data['author']);
+          $values['field_author'] = $values['uid'];
         }
         // Set node alias if exists.
         if (!empty($data['slug'])) {
@@ -288,12 +289,12 @@ class InstallHelper implements ContainerInjectionInterface {
         ],
         'field_content_link' => [
           'uri' => 'internal:' . call_user_func(function () {
-            $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Super easy vegetarian pasta bake']);
-            $node = reset($nodes);
-            return $this->aliasManager->getAliasByPath('/node/' . $node->id());
+              $nodes = $this->entityTypeManager->getStorage('node')->loadByProperties(['title' => 'Super easy vegetarian pasta bake']);
+              $node = reset($nodes);
+              return $this->aliasManager->getAliasByPath('/node/' . $node->id());
           }),
           'title' => 'Super easy vegetarian pasta bake',
-          ],
+        ],
         'field_summary' => [
           'value' => 'A wholesome pasta bake is the ultimate comfort food. This delicious bake is super quick to prepare and an ideal midweek meal for all the family.',
         ],
@@ -348,6 +349,7 @@ class InstallHelper implements ContainerInjectionInterface {
       // Creating user without any email/password.
       $user = $user_storage->create([
         'name' => $name,
+        'status' => 1,
       ]);
       $user->enforceIsNew();
       $user->save();
