@@ -78,11 +78,21 @@ class InstallHelper implements ContainerInjectionInterface {
   }
 
   /**
+   * Imports default contents.
+   */
+  public function importContent() {
+    $this->importArticles()
+      ->importRecipes()
+      ->importPages()
+      ->importBlockContent();
+  }
+
+  /**
    * Imports articles.
    *
    * @return $this
    */
-  public function importArticles() {
+  protected function importArticles() {
     $module_path = $this->moduleHandler->getModule('demo_umami_content')
       ->getPath();
     if (($handle = fopen($module_path . '/default_content/articles.csv', "r")) !== FALSE) {
@@ -141,7 +151,7 @@ class InstallHelper implements ContainerInjectionInterface {
    *
    * @return $this
    */
-  public function importRecipes() {
+  protected function importRecipes() {
     $module_path = $this->moduleHandler->getModule('demo_umami_content')->getPath();
 
     if (($handle = fopen($module_path . '/default_content/recipes.csv', "r")) !== FALSE) {
@@ -235,7 +245,7 @@ class InstallHelper implements ContainerInjectionInterface {
    *
    * @return $this
    */
-  public function importPages() {
+  protected function importPages() {
     if (($handle = fopen($this->moduleHandler->getModule('demo_umami_content')->getPath() . '/default_content/pages.csv', "r")) !== FALSE) {
       $headers = fgetcsv($handle);
       $uuids = [];
@@ -277,7 +287,7 @@ class InstallHelper implements ContainerInjectionInterface {
    *
    * @return $this
    */
-  public function importBlockContent() {
+  protected function importBlockContent() {
     $module_path = $this->moduleHandler->getModule('demo_umami_content')->getPath();
     $block_content_entities = [
       'umami_recipes_banner' => [
